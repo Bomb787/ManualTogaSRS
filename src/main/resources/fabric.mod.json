@@ -1,0 +1,34 @@
+{
+	"schemaVersion": 1,
+	"id": "a320",
+	"version": "${version}",
+	"name": "A320 Mod",
+	"description": "Adds an overly detailed (relative to Minecraft) A320.",
+	"authors": [
+		"Bomb787"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/Bomb787/A320"
+	},
+	"license": "All Rights Reserved",
+	"icon": "assets/a320/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "io.github.bomb787.a320.A320Mod"
+		]
+	},
+	"mixins": [
+		"a320.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

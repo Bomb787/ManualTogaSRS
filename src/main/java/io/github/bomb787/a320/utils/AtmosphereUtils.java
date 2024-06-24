@@ -52,11 +52,11 @@ public class AtmosphereUtils {
                 +temperature*(-0.29883885E-10+temperature*(0.21874425E-12
                 +temperature*(-0.17892321E-14+temperature*(0.11112018E-16
                 +temperature*(-0.30994571E-19)))))))));
-        for(int i = 0; i < 8; i++) {
+        for(int i = 0; i < 3; i++) {
             x = x*x;
         }
-        float vapor = (float) (25 * (6.1078 / x));
-        float dry = (pressure - vapor) / (287.058f * (temperature + 273.15f));
+        float vapor = (float) (0.25 * (6.1078 / x));
+        float dry = (pressure * 100 - vapor) / (287.058f * (temperature + 273.15f));
         vapor = (float) (vapor / (461.495 * (temperature + 273.15)));
         return dry + vapor;
     }

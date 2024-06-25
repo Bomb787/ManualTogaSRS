@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class DebugItem extends Item {
@@ -17,11 +18,15 @@ public class DebugItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        if(!world.isClient){
-            user.sendMessage(Text.literal(String.valueOf(world.getBiome(user.getBlockPos()).value().getTemperature())));
-            user.sendMessage(Text.literal(String.valueOf(world.getBiome(user.getBlockPos()).value().isCold(user.getBlockPos()))));
+        if(!world.isClient) {
         }
-
+        if(world.isClient) {
+            float movementAngle = (float) -Math.toDegrees(Math.atan(user.getVelocity().x/user.getVelocity().z));
+            float slipAngle = 0;
+            user.sendMessage(Text.literal(String.valueOf(movementAngle)), true);
+            System.out.println(user.getVelocity().x);
+            System.out.println(user.getVelocity().z);
+        }
         return TypedActionResult.pass(itemStack);
     }
 

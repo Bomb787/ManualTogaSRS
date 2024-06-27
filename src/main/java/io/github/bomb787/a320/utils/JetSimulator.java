@@ -19,6 +19,7 @@ public class JetSimulator {
         return (float) (1 - Math.pow(1 - n1/100f, 3*modifier)) * 0.75f + 0.25f;
     }
 
+    //TODO finish this
     public static float getThrust(float n1, float maxThrust, boolean reversing) {
         float thrust = (n1 / 100) * maxThrust;
         return reversing ? -thrust * 0.5f : thrust;

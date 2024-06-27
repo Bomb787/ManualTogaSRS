@@ -18,7 +18,7 @@ public class AtmosphereUtils {
      * @return Atmospheric pressure in hPa, 1013.25 at Y=63.
      */
     public static float pressureAtAltitude(float alt) {
-        return (float) (1013.25 * Math.pow((1-0.001127885*(alt-63)), 5.25588));
+        return (float) (1013.25 * Math.pow(1-0.001127885*(alt-63), 5.25588));
     }
 
     /**
@@ -59,6 +59,16 @@ public class AtmosphereUtils {
         float dry = (pressure * 100 - vapor) / (287.058f * (temperature + 273.15f));
         vapor = (float) (vapor / (461.495 * (temperature + 273.15)));
         return dry + vapor;
+    }
+
+    //TODO implement temperature
+    /**
+     * Gets the air density at an entity's location
+     * @param entity Input entity
+     * @return Air density
+     */
+    public static float densityAtAltitude(Entity entity) {
+        return airDensity(pressureAtAltitude(entity.getBlockY()), 15);
     }
 
     /**

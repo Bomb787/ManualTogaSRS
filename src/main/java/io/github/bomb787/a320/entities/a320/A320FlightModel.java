@@ -104,9 +104,9 @@ public class A320FlightModel {
         CL_VALUES.put(180, 0.05750f);
     }
 
-    private static final float CONSTANT = 65534/360f;
+    public static final float CONSTANT = 65534/360f;
 
-    private static float[] CL_TABLE;
+    public static float[] CL_TABLE;
 
     public A320FlightModel() {
         addClValues();

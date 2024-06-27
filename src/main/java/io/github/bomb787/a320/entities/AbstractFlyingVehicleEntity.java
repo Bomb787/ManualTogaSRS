@@ -30,8 +30,9 @@ public abstract class AbstractFlyingVehicleEntity extends Entity {
     }
 
     protected abstract float liftCoefficient();
-
     protected abstract float calculateLift();
+    protected abstract float dragCoefficient();
+    protected abstract float calculateDrag();
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {

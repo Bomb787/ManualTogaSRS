@@ -27,7 +27,7 @@ public abstract class AbstractHelicopterEntity extends AbstractFlyingVehicleEnti
      */
     @Override
     protected float calculateLift() {
-        float velocity = point7Radius * this.rpm;
+        float velocity = this.point7Radius * this.rpm;
         //Arctan version (float) (1.5 * (ONE_OVER_PI * Math.atan((this.getVelocity().length() - 25) / 4f) + 1.5))
         float translationalLift = (float) (0.5 * Math.log(this.getVelocity().length() + 1)) + 1;
         return liftCoefficient() * (this.wingArea / 2f) * AtmosphereUtils.densityAtAltitude(this) * velocity * velocity * translationalLift;
@@ -37,6 +37,21 @@ public abstract class AbstractHelicopterEntity extends AbstractFlyingVehicleEnti
     @Override
     protected float liftCoefficient() {
         return 69f;
+    }
+
+    @Override
+    protected float calculateDrag() {
+        return 1;
+    }
+
+    /**
+     * Not really sure how to model induced drag on helicopters, but I think it's related to translational lift?
+     * So I'm just gonna calculate parasitic drag here since translation lift is calculated in the lift method.
+     * @return Parastic drag coefficient
+     */
+    @Override
+    protected float dragCoefficient() {
+        return 69;
     }
 
 }

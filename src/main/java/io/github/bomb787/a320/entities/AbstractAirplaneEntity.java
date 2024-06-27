@@ -30,14 +30,29 @@ public abstract class AbstractAirplaneEntity extends AbstractFlyingVehicleEntity
     @Override
     protected float calculateLift() {
         //Percentage of the current velocity that is flowing over the chord of the wing (this is very unrealistic).
-        double chordVelocity = this.getVelocity().length() * (MathHelper.cos((MathHelper.PI * Math.abs((float)this.getSlipAngle())) / 90f) / 2f + 0.5);
+        //Multiplied by 20 to get velocity per second
+        double chordVelocity = 20 * this.getVelocity().length() * (MathHelper.cos((MathHelper.PI * Math.abs((float)this.getSlipAngle())) / 90f) / 2f + 0.5);
         return (float) (this.liftCoefficient() * ((AtmosphereUtils.densityAtAltitude(this) * chordVelocity * chordVelocity) / 2f) * this.wingArea);
     }
 
     //TODO NACA23012, 2412 might also be a good option
     @Override
-    public float liftCoefficient() {
+    protected float liftCoefficient() {
         return 69f;
+    }
+
+    @Override
+    protected float calculateDrag() {
+        return 1f;
+    }
+
+    /**
+     * D = induced drag + parasitic drag
+     * @return Total drag coefficient
+     */
+    @Override
+    protected float dragCoefficient() {
+        return 69;
     }
 
 }

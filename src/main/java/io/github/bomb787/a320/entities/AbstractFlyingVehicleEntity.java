@@ -13,15 +13,24 @@ import net.minecraft.world.World;
  */
 public abstract class AbstractFlyingVehicleEntity extends Entity {
 
-    //Total wing/rotor area.
-    protected float wingArea;
-    //Total horizontal stabilizer area, it was just easier to name is elevatorArea. :)
-    protected float elevatorArea;
-    //Same as elevatorArea, this is the total vertical stabilizer area.
-    protected float rudderArea;
+    //Total wing/rotor area in square meters.
+    protected final float wingArea;
+    //Total horizontal stabilizer area, it was just easier to name is elevatorArea. :) (also in square meters)
+    protected final float elevatorArea;
+    //Same as elevatorArea, this is the total vertical stabilizer area. (also in square meters)
+    protected final float rudderArea;
+    //Max speed in blocks per tick
+    protected final double maxSpeed;
+    //Max G-force before damage
+    protected final float maxG;
 
-    public AbstractFlyingVehicleEntity(EntityType<?> type, World world) {
+    public AbstractFlyingVehicleEntity(EntityType<?> type, World world, float wingArea, float elevatorArea, float rudderArea, double maxSpeed, float maxG) {
         super(type, world);
+        this.wingArea = wingArea;
+        this.elevatorArea = elevatorArea;
+        this.rudderArea = rudderArea;
+        this.maxSpeed = maxSpeed;
+        this.maxG = maxG;
     }
 
     @Override

@@ -10,13 +10,15 @@ import static java.lang.Math.log;
 public abstract class AbstractHelicopterEntity extends AbstractFlyingVehicleEntity {
 
     //Radius in meters/blocks
-    protected float rotorRadius;
+    protected final float rotorRadius;
     protected float rpm;
-    protected int bladeNumber;
-    protected float point7Radius;
+    protected final int bladeNumber;
+    protected final float point7Radius;
 
-    public AbstractHelicopterEntity(EntityType<?> type, World world) {
-        super(type, world);
+    public AbstractHelicopterEntity(EntityType<?> type, World world, float wingArea, float elevatorArea, float rudderArea, double maxSpeed, float maxG, float rotorRadius, int bladeNumber) {
+        super(type, world, wingArea, elevatorArea, rudderArea, maxSpeed, maxG);
+        this.rotorRadius = rotorRadius;
+        this.bladeNumber = bladeNumber;
         this.point7Radius = this.rotorRadius * 2 * MathHelper.PI * 0.7f;
     }
 
@@ -28,7 +30,6 @@ public abstract class AbstractHelicopterEntity extends AbstractFlyingVehicleEnti
     @Override
     protected float calculateLift() {
         float velocity = this.point7Radius * this.rpm;
-        //Arctan version (float) (1.5 * (ONE_OVER_PI * Math.atan((this.getVelocity().length() - 25) / 4f) + 1.5))
         float translationalLift = (float) (0.5 * Math.log(this.getVelocity().length() + 1)) + 1;
         return liftCoefficient() * (this.wingArea / 2f) * AtmosphereUtils.densityAtAltitude(this) * velocity * velocity * translationalLift;
     }
